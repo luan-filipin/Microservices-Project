@@ -52,3 +52,18 @@ Este projeto é uma arquitetura baseada em **Microserviços** utilizando **Sprin
 
 > **Importante:** todas as rotas do `employee-service` exigem token JWT válido que é validado pelo Gateway antes de acessar o microserviço.
 
+## 📋 Validações dos Campos
+Os dados enviados para o employee-service são validados automaticamente através das anotações do Spring (@Valid). Abaixo estão os principais campos e suas restrições:
+
+| Campo | Tipo   | Restrições                      |
+|--------|-------|--------------------------------|
+| name   | String | Obrigatório (@NotBlank)        |
+| document    | String | Obrigatório (@NotBlank), não pode ser alterado após a criação     |
+| birthDate    | String | Pode ser validado com @Past   |
+| employeeGender | LocalDate | Obrigatório (@NotNull)    |
+| address    | Objeto | Validado com @Valid, todos os subcampos também são obrigatórios  |
+| employeeRole    | Enum | Obrigatório (@NotNull)  |
+
+⚠️ Em caso de violação das regras, o serviço retorna 400 Bad Request com mensagens explicativas.
+
+
