@@ -20,8 +20,7 @@ Este projeto é uma arquitetura baseada em **Microserviços** utilizando **Sprin
 - Spring Cloud Eureka
 - Lombok
 - MapStruct
-- Docker (opcional)
-- Postman (para testes)
+
 
 ## ✅ Funcionalidades
 
@@ -32,19 +31,24 @@ Este projeto é uma arquitetura baseada em **Microserviços** utilizando **Sprin
 - Validação de tokens no Gateway
 - Comunicação entre serviços via Eureka Discovery
 
-## ▶️ Como rodar o projeto
+## 🚀 Endpoints da API
 
-### Pré-requisitos
+### 📌 auth-service (`/auth-service/api/user`)
 
-- Java 17+
-- Maven
-- MongoDB rodando localmente (ou via Docker)
-- (Opcional) Docker e Docker Compose
+| Método | Rota             | Descrição               | Autenticação |
+|--------|------------------|-------------------------|--------------|
+| POST   | `/create`        | Criação de usuário      | ❌ Não       |
+| POST   | `/login`         | Login e geração de JWT  | ❌ Não       |
 
-### Passo a passo
+### 📌 employee-service (`/employee-service/api/employee`)
 
-1. **Clone o repositório:**
+| Método | Rota                  | Descrição                      | Autenticação |
+|--------|-----------------------|--------------------------------|--------------|
+| POST   | `/create`             | Criação de funcionário         | ✅ Sim       |
+| GET    | `/findByDocument/{}` | Buscar funcionário por Document     | ✅ Sim       |
+| GET    | `/findAll`           | Buscar todos os funcionários   | ✅ Sim       |
+| DELETE | `/delete/{}`         | Remover funcionário por Document    | ✅ Sim       |
+| PUT    | `/put/{}`            | Atualizar funcionário por Document  | ✅ Sim       |
 
-   ```bash
-   git clone https://github.com/seu-usuario/nome-do-repositorio.git
+> **Importante:** todas as rotas do `employee-service` exigem token JWT válido que é validado pelo Gateway antes de acessar o microserviço.
 
